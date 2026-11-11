@@ -1,18 +1,20 @@
-"use client";
+"use client"
 
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import dynamic from "next/dynamic";
+import * as React from "react"
+import dynamic from "next/dynamic"
 
-// 1. Create a dynamic version that skips SSR
-const NextThemesProviderNoSSR = dynamic(
+// 👇 Load the ThemeProvider only on the client side to avoid SSR crashes
+const NextThemesProvider = dynamic(
   () => import("next-themes").then((mod) => mod.ThemeProvider),
   { ssr: false }
-);
+)
 
 export function ThemeProvider({
   children,
   ...props
-}: React.ComponentProps<typeof NextThemesProvider>) {
-  // 2. Use the dynamic version
-  return <NextThemesProviderNoSSR {...props}>{children}</NextThemesProviderNoSSR>;
+}: {
+  children: React.ReactNode;
+  [key: string]: any;
+}) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
