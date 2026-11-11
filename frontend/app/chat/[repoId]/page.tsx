@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic = "force-dynamic";
 import { use } from "react";
 import { AppShell } from "@/components/layout/app-shell";
 import { ChatIDEView } from "@/components/chat/chat-ide-view";
